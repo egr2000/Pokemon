@@ -12,6 +12,8 @@ public class Main {
         Pokemon pika = new Pokemon("pika", 1000, "raio", "choque", "teia");
         Pokemon bulba = new Pokemon("bulba", 1000, "agua", "jato", "chicote");
 
+        NPC bruna = new NPC("Bruna", bulba);
+
 //        new Pokemon("Pika3",1000,"at1","at2","at3");
 
         //int a = new Ataque("ata",500,300).getDano();
