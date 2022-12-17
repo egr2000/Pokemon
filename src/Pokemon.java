@@ -1,21 +1,24 @@
 public class Pokemon {
 
     public String nome;
-    public int vida;
+    public Integer vida;
     public Ataque ataque1;
     public Ataque ataque2;
     public Ataque ataque3;
 
     public String tipoPokemon;
+    public Integer nivel;
+    public Integer nivelMax;
 
 
-    public Pokemon(String nomePk, int vidaPk, String nomeAtaque1,String nomeAtaque2,String nomeAtaque3) {
-    this.nome = nomePk;
-    this.vida = vidaPk;
-    this.ataque1 = new Ataque(nomeAtaque1,500,300);
-    this.ataque2 = new Ataque(nomeAtaque2,500,300);
-    this.ataque3 = new Ataque(nomeAtaque3,500,300);
-
+    public Pokemon(String nomePk, Integer vidaPk, Integer nivelMax, String nomeAtaque1,String nomeAtaque2,String nomeAtaque3) {
+        this.nome = nomePk;
+        this.vida = vidaPk;
+        this.nivel = 1;
+        this.nivelMax = nivelMax;
+        this.ataque1 = new Ataque(nomeAtaque1,500,300);
+        this.ataque2 = new Ataque(nomeAtaque2,500,300);
+        this.ataque3 = new Ataque(nomeAtaque3,500,300);
     }
 
     public String getNome() {
@@ -66,7 +69,13 @@ public class Pokemon {
         this.tipoPokemon = tipoPokemon;
     }
 
+    public Integer getNivel() {
+        return nivel;
+    }
 
+    public void setNivel(Integer nivel) {
+        this.nivel = nivel;
+    }
 }
 
 

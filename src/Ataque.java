@@ -16,11 +16,6 @@ public class Ataque {
         this.dano = danoMinimo + random.nextInt(danoMaximo-danoMinimo);
     }
 
-
-    public Ataque(){
-
-    }
-
     public String getNomeAtaque() {
         return nomeAtaque;
     }

@@ -1,5 +1,4 @@
 public class NPC{
-
     public String nomeNpc;
     public String descrNpc;
     public String frase1;
@@ -10,9 +9,11 @@ public class NPC{
     public Pokemon pokemon2;
     public Pokemon pokemon3;
 
-    public NPC(String nomeNpc, Pokemon pokemon1) {
+    public NPC(String nomeNpc, Pokemon pokemon1, Pokemon pokemon2, Pokemon pokemon3) {
         this.nomeNpc = nomeNpc;
         this.pokemon1 = pokemon1;
+        this.pokemon2 = pokemon2;
+        this.pokemon3 = pokemon3;
     }
 
     public String getNomeNpc() {
