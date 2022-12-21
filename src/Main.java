@@ -1,8 +1,8 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
+    public static Random random = new Random();
+    public static Pokemon pokemonNpc;
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
 
@@ -10,64 +10,130 @@ public class Main {
         Pokemon pokemonNpcFogo1 = new Pokemon ("Charmander", 1000, 3,"Scratch", "Ember", "Flame Charge");
         Pokemon pokemonNpcFogo2 = new Pokemon ("Ponyta", 1000, 2, "Tackle", "Ember", "Flame Charge");
         Pokemon pokemonNpcFogo3 = new Pokemon ("Growlithe", 1000, 2, "Bite", "Ember", "Body Slam");
-
         NPC bruna = new NPC("Bruna", pokemonNpcFogo1, pokemonNpcFogo2, pokemonNpcFogo3);
 
+        Pokemon pokemonNpcGrama1 = new Pokemon("Bellsprout",1000,3, "Acid","Sludge Bomb","Power Whip");
+        Pokemon pokemonNpcGrama2 = new Pokemon("Bulbassauro", 1000, 3, "Vine Whip", "Sludge Bomb", "Power Whip");
+        Pokemon pokemonNpcGrama3 = new Pokemon("Oddish",1000, 3,"Moonblast","Seed Bomb","Razor Leaf");
+        NPC eduardo = new NPC("Eduardo", pokemonNpcGrama1, pokemonNpcGrama2, pokemonNpcGrama3);
+
+        Pokemon pokemonNpcAgua1 = new Pokemon("Squirtle",1000,3, "Aqua Jet","Water Pulse","Aqua Tail");
+        Pokemon pokemonNpcAgua2 = new Pokemon("Psyduck", 1000, 2, "Water Gun", "Zen Headbutt", "Aqua Tail");
+        Pokemon pokemonNpcAgua3 = new Pokemon("Poliwag",1000, 3,"Water Pulse","Defense Curl","Bubble");
+        NPC matheus = new NPC("Matheus", pokemonNpcAgua1, pokemonNpcAgua2, pokemonNpcAgua3);
+
         //Pokemons do Treinador
-        Pokemon pokemonTr1 = new Pokemon("Bellsprout",1000,3, "Acid","Sludge Bomb","Power Whip");
-        Pokemon pokemonTr2 = new Pokemon("Bulbassauro", 1000, 3, "Vine Whip", "Sludge Bomb", "Power Whip");
-        Pokemon pokemonTr3 = new Pokemon("Oddish",1000, 3,"Moonblast","Seed Bomb","Razor Leaf");
+        Pokemon pokemonTr1 = new Pokemon("Pikachu",1000,2, "Thunder Shock","Quick Attack","Discharge");
+        Pokemon pokemonTr2 = new Pokemon("Articuno", 1000, 1, "Frost Beath", "Icy Wind", "Ice Beam");
+        Pokemon pokemonTr3 = new Pokemon("Doduo",1000, 2,"Peck","Quick Attack","Swift");
+        Pokemon pokemonTr4 = new Pokemon("Clefable",1000, 2,"Pound","Dazzling Gleam","Moonblast");
+        Pokemon pokemonTr5 = new Pokemon("Jigglypuff",1000, 2,"Pound","Disarming Voice","Play Rough");
+        Pokemon pokemonTr6 = new Pokemon("Dragonair",1000, 3,"Dragon Breath","Dragon Pulse","Aqua Tail");
 
-        Map<Integer, Pokemon> listaPokemon = new HashMap<>();
-        listaPokemon.put(1, pokemonTr1);
-        listaPokemon.put(2, pokemonTr2);
-        listaPokemon.put(3, pokemonTr3);
+        ArrayList<Pokemon> listaTodosPokemonsTr = new ArrayList<Pokemon>();
+        listaTodosPokemonsTr.add(pokemonTr1);
+        listaTodosPokemonsTr.add(pokemonTr2);
+        listaTodosPokemonsTr.add(pokemonTr3);
+        listaTodosPokemonsTr.add(pokemonTr4);
+        listaTodosPokemonsTr.add(pokemonTr5);
+        listaTodosPokemonsTr.add(pokemonTr6);
 
+        System.out.println("Bem-vindo Treinador!");
         System.out.println("Digite o seu nome: ");
         String nome = scanner.nextLine();
 
-        System.out.println("1 - " + pokemonTr1.getNome());
-        System.out.println("2 - " + pokemonTr2.getNome());
-        System.out.println("3 - " + pokemonTr3.getNome());
-        System.out.println("Escolha o seu primeiro pokemon: ");
-        Integer codPokemon1 = scanner.nextInt();
-        System.out.println("Escolha o seu segundo pokemon: ");
-        Integer codPokemon2 = scanner.nextInt();
-        System.out.println("Escolha o seu terceiro pokemon: ");
-        Integer codPokemon3 = scanner.nextInt();
+        int[] codPokemon = new int[3];
 
-        Treinador usuario = new Treinador(nome, listaPokemon.get(codPokemon1), listaPokemon.get(codPokemon2), listaPokemon.get(codPokemon3));
-
-        //Batalha
-        Map<Integer, Pokemon> listaPokemonTr = new HashMap<>();
-        listaPokemonTr.put(1, usuario.pokemon1);
-        listaPokemonTr.put(2, usuario.pokemon2);
-        listaPokemonTr.put(3, usuario.pokemon3);
-
-        System.out.println("1 - " + usuario.pokemon1.getNome());
-        System.out.println("2 - " + usuario.pokemon2.getNome());
-        System.out.println("3 - " + usuario.pokemon3.getNome());
-        System.out.println("Escolha um pokemon para batalhar: ");
-        Integer codPokemonBatalha = scanner.nextInt();
-
-        Map<Integer, Ataque> listaAtaqueTr = new HashMap<>();
-        listaAtaqueTr.put(1, listaPokemonTr.get(codPokemonBatalha).ataque1);
-        listaAtaqueTr.put(2, listaPokemonTr.get(codPokemonBatalha).ataque2);
-        listaAtaqueTr.put(3, listaPokemonTr.get(codPokemonBatalha).ataque3);
-
-        System.out.println("1 - " + listaPokemonTr.get(codPokemonBatalha).ataque1.getNomeAtaque());
-        System.out.println("2 - " + listaPokemonTr.get(codPokemonBatalha).ataque2.getNomeAtaque());
-        System.out.println("3 - " + listaPokemonTr.get(codPokemonBatalha).ataque3.getNomeAtaque());
-        System.out.println("Escolha um ataque: ");
-        Integer codAtaque = scanner.nextInt();
-
-        bruna.pokemon1.setVida(bruna.pokemon1.vida - listaAtaqueTr.get(codAtaque).getDano());
-        System.out.println("Após o ataque " + bruna.pokemon1.getNome() + " está com " + bruna.pokemon1.vida);
-
-        if(bruna.pokemon1.vida <= 0){
-
+        for(int i = 0; i < 3; i++){
+            do {
+                for (Pokemon j : listaTodosPokemonsTr) {
+                    System.out.println((listaTodosPokemonsTr.indexOf(j) + 1) + " - " + j.getNome());
+                }
+                System.out.println("Escolha o seu " + (i + 1) + "° pokemon: ");
+                codPokemon[i] = scanner.nextInt() - 1;
+            } while(codPokemon[i] < 0 || codPokemon[i] > (listaTodosPokemonsTr.size()-1));
+            //listaTodosPokemonsTr.remove(codPokemon[i]);
         }
 
+        Treinador usuario = new Treinador(nome, listaTodosPokemonsTr.get(codPokemon[0]), listaTodosPokemonsTr.get(codPokemon[1]), listaTodosPokemonsTr.get(codPokemon[2]));
+
+        //Batalha
+        ArrayList<Pokemon> listaPokemonTr = new ArrayList<Pokemon>();
+        listaPokemonTr.add(usuario.pokemon1);
+        listaPokemonTr.add(usuario.pokemon2);
+        listaPokemonTr.add(usuario.pokemon3);
+
+        System.out.println("Hora de batalhar!");
+        escolherPokemonBatalhar(usuario);
+        int codPokemonTreinador = scanner.nextInt();
+        Pokemon pokemonTr = listaPokemonTr.get(codPokemonTreinador-1);
+        listaPokemonTr.remove(codPokemonTreinador);
+
+        Map<Integer, NPC> listaNpc = new HashMap<>();
+        listaNpc.put(1, bruna);
+        listaNpc.put(2, eduardo);
+        listaNpc.put(3, matheus);
+
+        Integer codNpc = 1 + random.nextInt(3);
+        NPC npc = listaNpc.get(codNpc);
+
+        ArrayList<Pokemon> listaPokemonNpc = new ArrayList<Pokemon>();
+        listaPokemonNpc.add(npc.pokemon1);
+        listaPokemonNpc.add(npc.pokemon2);
+        listaPokemonNpc.add(npc.pokemon3);
+
+        sortearPokemonNpc(listaPokemonNpc);
+
+        System.out.println("Olá, sou seu rival " + npc.getNomeNpc());
+        System.out.println("O inimigo escolheu " + pokemonNpc.getNome());
+
+        Map<Integer, Ataque> listaAtaqueTr = new HashMap<>();
+        listaAtaqueTr.put(1, pokemonTr.ataque1);
+        listaAtaqueTr.put(2, pokemonTr.ataque2);
+        listaAtaqueTr.put(3, pokemonTr.ataque3);
+
+        Map<Integer, Ataque> listaAtaqueNpc = new HashMap<>();
+        listaAtaqueNpc.put(1, pokemonNpc.ataque1);
+        listaAtaqueNpc.put(2, pokemonNpc.ataque2);
+        listaAtaqueNpc.put(3, pokemonNpc.ataque3);
+
+        Boolean batalhaTerminou = false;
+        do {
+            escolherAtaque(pokemonTr, codPokemonTreinador);
+            Integer codAtaque = scanner.nextInt();
+
+            Integer dano = listaAtaqueTr.get(codAtaque).getDano();
+            realizarAtaque(pokemonNpc, dano);
+
+            if (pokemonNpc.vida <= 0 && listaPokemonNpc.size() > 0) {
+                sortearPokemonNpc(listaPokemonNpc);
+                System.out.println("O inimigo escolheu " + pokemonNpc.getNome());
+            }
+            if (pokemonNpc.vida <= 0 && listaPokemonNpc.size() == 0) {
+                System.out.println("Vencedor é " + usuario.getNome());
+                batalhaTerminou = true;
+                break;
+            }
+
+            dano = sortearAtaqueNpc(listaAtaqueNpc);
+            realizarAtaque(pokemonTr, dano);
+
+            if (pokemonTr.vida <= 0 && listaPokemonTr.size() > 0) {
+                for (Pokemon i : listaPokemonTr) {
+                    System.out.println(i.getNome());
+                }
+                System.out.println("Escolha um pokemon para batalhar: ");
+                codPokemonTreinador = scanner.nextInt();
+                pokemonTr = listaPokemonTr.get(codPokemonTreinador);
+                listaPokemonTr.remove(codPokemonTreinador);
+                System.out.println("Você escolheu " + pokemonTr.getNome());
+            }
+            if (pokemonTr.vida <= 0 && listaPokemonTr.size() == 0) {
+                System.out.println("Vencedor é " + npc.getNomeNpc());
+                batalhaTerminou = true;
+            }
+
+        } while(!batalhaTerminou);
 
 
         /*
@@ -82,64 +148,34 @@ public class Main {
         Pokemon aaa = new Pokemon("Venussaur
         */
 
-       // Scanner scanner = new Scanner(System.in);
+    }
+    public static void escolherPokemonBatalhar(Treinador usuario){
+        System.out.println("1 - " + usuario.pokemon1.getNome());
+        System.out.println("2 - " + usuario.pokemon2.getNome());
+        System.out.println("3 - " + usuario.pokemon3.getNome());
+        System.out.println("Escolha um pokemon para batalhar: ");
+    }
 
-      //  System.out.println();
+    public static void sortearPokemonNpc(ArrayList listaPokemonNpc){
+        int codPokemonNpc = random.nextInt(listaPokemonNpc.size());
+        pokemonNpc = (Pokemon) listaPokemonNpc.get(codPokemonNpc);
+        listaPokemonNpc.remove(codPokemonNpc);
+    }
 
+    public static Integer sortearAtaqueNpc(Map<Integer, Ataque> listaAtaqueNpc){
+        Integer codAtaque = 1 + random.nextInt(3-1);
+        return listaAtaqueNpc.get(codAtaque).getDano();
+    }
 
-        //Ataque ata = new Ataque("pika",500,300);
-        /*Pokemon pika = new Pokemon("pika", 1000, "raio", "choque", "teia");
-        Pokemon bulba = new Pokemon("bulba", 1000, "agua", "jato", "chicote");
+    public static void escolherAtaque(Pokemon pokemonTr, Integer codPokemonBatalha){
+        System.out.println("1 - " + pokemonTr.ataque1.getNomeAtaque());
+        System.out.println("2 - " + pokemonTr.ataque2.getNomeAtaque());
+        System.out.println("3 - " + pokemonTr.ataque3.getNomeAtaque());
+        System.out.println("Escolha um ataque: ");
+    }
 
-        NPC bruna = new NPC("Bruna", bulba);*/
-
-//        new Pokemon("Pika3",1000,"at1","at2","at3");
-
-        //int a = new Ataque("ata",500,300).getDano();
-        //System.out.println(a);
-        /*System.out.println("Pokemon - " + pika.getNome());
-        System.out.println("Ataque1 - " + pika.ataque1.getNomeAtaque() + " - " + pika.ataque1.getDano());
-        System.out.println("Ataque2 - " + pika.ataque2.getNomeAtaque() + " - " + pika.ataque2.getDano());
-        System.out.println("Ataque3 - " + pika.ataque3.getNomeAtaque() + " - " + pika.ataque3.getDano());
-
-        System.out.println("Pokemon - " + bulba.getNome());
-        System.out.println("Ataque1 - " + bulba.ataque1.getNomeAtaque() + " - " + bulba.ataque1.getDano());
-        System.out.println("Ataque2 - " + bulba.ataque2.getNomeAtaque() + " - " + bulba.ataque2.getDano());
-        System.out.println("Ataque3 - " + bulba.ataque3.getNomeAtaque() + " - " + bulba.ataque3.getDano());*/
-
-//        System.out.println("Pokemon - " + pika.getNome());
-//        System.out.println("Ataque1 - " + pika.ataque1.getNomeAtaque() + " - " + pika.ataque1.getDano());
-//        System.out.println("Ataque2 - " + pika.ataque2.getNomeAtaque() + " - " + pika.ataque2.getDano());
-//        System.out.println("Ataque3 - " + pika.ataque3.getNomeAtaque() + " - " + pika.ataque3.getDano());
-
-
-        /*Batalha bat1 = new Batalha(pika,bulba);
-            bat1.AtaquePok1();
-            bat1.AtaquePok2();
-
-        System.out.println(bat1.getPokemon1().vida);
-
-
-
-
-
-        //pika.setVida(500);
-        System.out.println(bat1.getPokemon2().vida);*/
-
-
-
-        //pika.ataque1.getDano();
-        //pika.ataque2.getDano();
-        //pika.ataque3.getDano();
-       /* System.out.println(pika.ataque1.getDano1());
-        System.out.println(pika.ataque1.getNomeAtaque());
-        System.out.println(pika.ataque2.getNomeAtaque());
-        System.out.println(pika.ataque3.getNomeAtaque());
-        System.out.println(pika.ataque1.getDano1());
-        System.out.println(pika.ataque1.getNomeAtaque());
-        System.out.println(pika.ataque2.getNomeAtaque());
-        System.out.println(pika.ataque3.getNomeAtaque());*/
-
-
+    public static void realizarAtaque(Pokemon pokemon, Integer dano){
+        pokemon.setVida(pokemon.vida - dano);
+        System.out.println("Após o ataque " + pokemon.getNome() + " está com " + pokemon.vida);
     }
 }
