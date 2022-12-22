@@ -67,7 +67,7 @@ public class Main {
         escolherPokemonBatalhar(usuario);
         int codPokemonTreinador = scanner.nextInt();
         Pokemon pokemonTr = listaPokemonTr.get(codPokemonTreinador-1);
-        listaPokemonTr.remove(codPokemonTreinador);
+//        listaPokemonTr.remove(codPokemonTreinador);
 
         Map<Integer, NPC> listaNpc = new HashMap<>();
         listaNpc.put(1, bruna);
@@ -105,9 +105,13 @@ public class Main {
             Integer dano = listaAtaqueTr.get(codAtaque).getDano();
             realizarAtaque(pokemonNpc, dano);
 
+          //  if (pokemonNpc.vida <= 0){
+          //      listaPokemonNpc.remove(pokemonNpc);
+          //  }
+
             if (pokemonNpc.vida <= 0 && listaPokemonNpc.size() > 0) {
                 sortearPokemonNpc(listaPokemonNpc);
-                System.out.println("O inimigo escolheu " + pokemonNpc.getNome());
+                System.out.println("\nO inimigo escolheu " + pokemonNpc.getNome());
             }
             if (pokemonNpc.vida <= 0 && listaPokemonNpc.size() == 0) {
                 System.out.println("Vencedor é " + usuario.getNome());
@@ -118,14 +122,26 @@ public class Main {
             dano = sortearAtaqueNpc(listaAtaqueNpc);
             realizarAtaque(pokemonTr, dano);
 
+            //if (pokemonTr.vida <=0 ) {
+            //    listaPokemonTr.remove(pokemonTr);
+            //}
             if (pokemonTr.vida <= 0 && listaPokemonTr.size() > 0) {
+
+
+                listaPokemonTr.remove(codPokemonTreinador-1);
+                int a=1;
                 for (Pokemon i : listaPokemonTr) {
-                    System.out.println(i.getNome());
+                    System.out.println(a+" - "+i.getNome());
+                    a++;
+                }
+                if (listaPokemonTr.size() ==0){
+                    System.out.println("Vencedor é " + npc.getNomeNpc());
+                    batalhaTerminou = true;
+                    break;
                 }
                 System.out.println("Escolha um pokemon para batalhar: ");
                 codPokemonTreinador = scanner.nextInt();
-                pokemonTr = listaPokemonTr.get(codPokemonTreinador);
-                listaPokemonTr.remove(codPokemonTreinador);
+                pokemonTr = listaPokemonTr.get(codPokemonTreinador-1);
                 System.out.println("Você escolheu " + pokemonTr.getNome());
             }
             if (pokemonTr.vida <= 0 && listaPokemonTr.size() == 0) {
@@ -176,6 +192,12 @@ public class Main {
 
     public static void realizarAtaque(Pokemon pokemon, Integer dano){
         pokemon.setVida(pokemon.vida - dano);
-        System.out.println("Após o ataque " + pokemon.getNome() + " está com " + pokemon.vida);
+        if (pokemon.vida <= 0){
+            System.out.println("Após o ataque " + pokemon.getNome() + " Morreu!\n");
+
+
+        } else {
+            System.out.println("Após o ataque " + pokemon.getNome() + " está com " + pokemon.vida);
+        }
     }
 }
